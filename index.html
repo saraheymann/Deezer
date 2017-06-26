@@ -50,7 +50,7 @@ $(document).ready(function() {
         }
         }, {perms: 'basic_access,email, offline_access, manage_library_, manage_community, delete_library, listening_history'});
     });
-    $("#boredButton").on("click", function(){
+    $("#boredButton").on("click", function playBored(){
         DZ.api('/playlist/908622995', function(response){
             console.log(response);
         });

@@ -50,11 +50,13 @@ $(document).ready(function() {
         }
         }, {perms: 'basic_access,email, offline_access, manage_library_, manage_community, delete_library, listening_history'});
     });
-    $("#boredButton").on("click", function playBored(){
-        DZ.api('/playlist/908622995', function(response){
-            console.log(response);
-        });
-    });
+    // $("#boredButton").on("click", function playBored(){
+    //     DZ.api('/playlist/908622995', function(response){
+    //         console.log(response);
+    //         console.log('this is the bored zone');
+    //     });
+    // };
+    
 
     function getLocation() {
   var location;
@@ -62,7 +64,7 @@ $(document).ready(function() {
     format: "jsonp",
     dataType: "jsonp",
     // the site of the https problem
-    url: "https://ip-api.com/json",
+    url: "http://ip-api.com/json",
     success: function(data) {
       location = (data.lat + "," + data.lon);
       $("#weather-location").html(data.city + ", " + data.region);
@@ -198,6 +200,12 @@ function romanticPlaylist(weatherIcon) {
   }
 
 };
+$("#boredButton").on("click", function playBored(){
+        DZ.api('/playlist/2096299244', function(response){
+            console.log(response);
+            console.log('this is the bored zone');
+        })
+        });
 
 </script>
 </body>

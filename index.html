@@ -118,7 +118,7 @@ function getJson(url) {
       success: function(json) {
       
         $("#weather-current").html(Math.round(json.currently.temperature) + "°");
-        // setBackground(json.currently.icon);
+        romanticPlaylistFunc(json.currently.icon);
       }
 
     })
@@ -152,6 +152,7 @@ $("#temp-type").on("click", function() {
 
 });
 
+function romanticPlaylistFunc() {
 $("#romanticButton").on("click", function romanticPlaylist(weatherIcon) {
   //console.log(weatherIcon);
   switch (weatherIcon) {
@@ -194,8 +195,9 @@ $("#romanticButton").on("click", function romanticPlaylist(weatherIcon) {
       break;
 
   }
+})
 
-});
+};
 
 </script>
 </body>

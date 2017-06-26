@@ -9,11 +9,24 @@
 <div>
     <h1>Test</h1>
     <button id="deezerLogin">Login to Deezer</button>
-    <button id="trackList">Click here for tracklist</button>
+
+    <div id="weather-location"></div>
+    <div id="weather-current"></div>
+    <div>
+    	<p id="temp-type">Fahrenheit</p>
+    </div>
+
+    <button id="romanticButton">Romantic</button>
+    <button id="boredButton">Bored</button>
+    <button id="happyButton">Happy</button>
 </div>
+<br>
 <div id="deezerWidget"></div>
 <script src="https://e-cdns-files.dzcdn.net/js/min/dz.js"></script>
 <script type="text/javascript">
+$(document).ready(function() {
+  getLocation();
+})
     DZ.init({
         appId  : '240762',
         channelUrl : 'https://saraheymann.github.io/Deezer/index.html',
@@ -37,11 +50,153 @@
         }
         }, {perms: 'basic_access,email, offline_access, manage_library_, manage_community, delete_library, listening_history'});
     });
-    $("#trackList").on("click", function(){
-        DZ.api('/playlist/908622995', function(response){
-            console.log(response);
-        });
-    });
+    // $("#trackList").on("click", function(){
+    //     DZ.api('/playlist/908622995', function(response){
+    //         console.log(response);
+    //     });
+    // };
+
+    function getLocation() {
+  var location;
+  $.ajax({
+    format: "jsonp",
+    dataType: "jsonp",
+    url: "http://ip-api.com/json",
+    success: function(data) {
+      location = (data.lat + "," + data.lon);
+      $("#weather-location").html(data.city + ", " + data.region);
+      getURL(location)
+    },
+    error: function() {
+      httpsLocation();
+    },
+    method: "GET"
+  });
+
+  function httpsLocation() {
+    if (navigator.geolocation) {
+      var location;
+      navigator.geolocation.getCurrentPosition(passLocation);
+    }
+  }
+
+  function passLocation(position) {
+    location = position.coords.latitude + ", " + position.coords.longitude;
+    setCity(location);
+    getURL(location);
+  }
+}
+
+function setCity(latLon) {
+  var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon + "&sensor=true";
+  url = url.replace(/\s/g, "");
+  $.ajax({
+    format: "json",
+    dataType: "json",
+    url: url,
+    success: function(data) {
+      $('#weather-location').html(data.results[0].address_components[2].long_name);
+    },
+    method: "GET"
+  });
+}
+
+function getURL(location, tempSetting) {
+  var url = ("https://api.forecast.io/forecast/2b4b9e2d0c9c7ba61f588616d2967c9c/" + location);
+ 
+  getJson(url);
+
+}
+
+function getJson(url) {
+  
+
+  $.ajax({
+      format: "jsonp",
+      dataType: "jsonp",
+      url: url,
+      success: function(json) {
+      
+        $("#weather-current").html(Math.round(json.currently.temperature) + "°");
+        // setBackground(json.currently.icon);
+      }
+
+    })
+    // .error(function(jqXHR, textStatus, errorThrown) {
+    //   alert("error: " + JSON.stringify(jqXHR));
+    // })
+}
+
+$("#temp-type").on("click", function() {
+  var currentTemp = $("#weather-current").html().replace(/°/g, "");
+
+  if ($("#temp-type").html() == "Fahrenheit") {
+    $("#weather-current").html(toCelsius(currentTemp) + "°");
+    $("#temp-type").html("Celsius");
+
+  } else if ($("#temp-type").html() == "Celsius") {
+    $("#weather-current").html(toFahrenheit(currentTemp) + "°");
+    $("#temp-type").html("Fahrenheit");
+
+  }
+
+  function toCelsius(num) {
+    var newNum = (parseInt(num) - 32) * 5 / 9;
+    return Math.round(newNum);
+  }
+
+  function toFahrenheit(num) {
+    var newNum = (parseInt(num) * 9 / 5) + 32;
+    return Math.round(newNum);
+  }
+
+});
+
+// $("#romanticButton").on("click", function romanticPlaylist(weatherIcon) {
+//   //console.log(weatherIcon);
+//   switch (weatherIcon) {
+//     case "clear-day":
+//       DZ.api('/playlist/908622995', function(response){
+//             console.log(response);
+//         })
+//       break;
+//     case "clear-night":
+//       DZ.api('/playlist/908622995', function(response){
+//             console.log(response);
+//         })
+//       break;
+//     case "rain":
+//       DZ.api('/playlist/908622995', function(response){
+//             console.log(response);
+//         })
+//       break;
+//     case "cloudy":
+//       DZ.api('/playlist/908622995', function(response){
+//             console.log(response);
+//         })
+//       break;
+//     case "partly-cloudy-day":
+//       DZ.api('/playlist/908622995', function(response){
+//             console.log(response);
+//         })
+//       break;
+//     case "partly-cloudy-night":
+//       DZ.api('/playlist/908622995', function(response){
+//             console.log(response);
+//         })
+//       break;
+//     case "snow":
+//       DZ.api('/playlist/908622995', function(response){
+//             console.log(response);
+//         })
+//       break;
+//     default:
+//       break;
+
+//   }
+
+// }
+
 </script>
 </body>
 </html>

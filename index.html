@@ -61,7 +61,7 @@ $(document).ready(function() {
   $.ajax({
     format: "jsonp",
     dataType: "jsonp",
-    url: "https://ip-api.com/json",
+    url: "http://ip-api.com/json",
     success: function(data) {
       location = (data.lat + "," + data.lon);
       $("#weather-location").html(data.city + ", " + data.region);
@@ -118,7 +118,7 @@ function getJson(url) {
       success: function(json) {
       
         $("#weather-current").html(Math.round(json.currently.temperature) + "°");
-        romanticPlaylistFunc(json.currently.icon);
+      $("#romanticButton").on("click", romanticPlaylist(json.currently.icon))
       }
 
     })
@@ -152,8 +152,7 @@ $("#temp-type").on("click", function() {
 
 });
 
-function romanticPlaylistFunc() {
-$("#romanticButton").on("click", function romanticPlaylist(weatherIcon) {
+function romanticPlaylist(weatherIcon) {
   //console.log(weatherIcon);
   switch (weatherIcon) {
     case "clear-day":
@@ -195,7 +194,6 @@ $("#romanticButton").on("click", function romanticPlaylist(weatherIcon) {
       break;
 
   }
-})
 
 };
 

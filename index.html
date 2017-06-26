@@ -4,7 +4,7 @@
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<body>
+<body id="body">
 <div id="dz-root"></div>
 <div>
     <h1>Test</h1>
@@ -50,17 +50,18 @@ $(document).ready(function() {
         }
         }, {perms: 'basic_access,email, offline_access, manage_library_, manage_community, delete_library, listening_history'});
     });
-    // $("#trackList").on("click", function(){
-    //     DZ.api('/playlist/908622995', function(response){
-    //         console.log(response);
-    //     });
-    // };
+    $("#boredButton").on("click", function(){
+        DZ.api('/playlist/908622995', function(response){
+            console.log(response);
+        });
+    });
 
     function getLocation() {
   var location;
   $.ajax({
     format: "jsonp",
     dataType: "jsonp",
+    // the site of the https problem
     url: "https://ip-api.com/json",
     success: function(data) {
       location = (data.lat + "," + data.lon);
@@ -119,6 +120,7 @@ function getJson(url) {
       
         $("#weather-current").html(Math.round(json.currently.temperature) + "°");
       $("#romanticButton").on("click", romanticPlaylist(json.currently.icon))
+      console.log(romanticPlaylist);
       }
 
     })

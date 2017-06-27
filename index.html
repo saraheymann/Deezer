@@ -2,11 +2,25 @@
 <html>
 <head>
     <title></title>
+    <script
+	  src="https://code.jquery.com/jquery-3.2.1.js"
+	  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+	  crossorigin="anonymous">
+	</script>
+    <script type="text/javascript" src="assets/weather.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style type="text/css">
+    	#body{
+    		background-color: blue;
+    	}
+    	#holder{
+    		background-color: orange;
+    	}
+    </style>
 </head>
 <body id="body">
 <div id="dz-root"></div>
-<div>
+<div id="holder">
     <h1>Test</h1>
     <button id="deezerLogin">Login to Deezer</button>
 
@@ -49,110 +63,107 @@ $(document).ready(function() {
         }, {perms: 'basic_access,email, offline_access, manage_library_, manage_community, delete_library, listening_history'});
     });
     
-    var corysVar;
-    var x = document.getElementById("weather-location");
-    function getLocation() {
+//     var corysVar;
+//     var x = document.getElementById("weather-location");
+//     function getLocation() {
   
-  if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-    }
-}
-function showPosition(position) {
-    x.innerHTML = "Latitude: " + position.coords.latitude + 
-    "<br>Longitude: " + position.coords.longitude; 
-    corysVar = (position.coords.latitude + "," + position.coords.longitude);
-}
+//   if (navigator.geolocation) {
+//         navigator.geolocation.getCurrentPosition(showPosition);
+//     } else {
+//         x.innerHTML = "Geolocation is not supported by this browser.";
+//     }
+// }
+// function showPosition(position) {
+//     x.innerHTML = "Latitude: " + position.coords.latitude + 
+//     "<br>Longitude: " + position.coords.longitude; 
+//     corysVar = (position.coords.latitude + "," + position.coords.longitude);
+// }
 
-  function httpsLocation() {
-    if (navigator.geolocation) {
+//   function httpsLocation() {
+//     if (navigator.geolocation) {
       
-      var x;
-      navigator.geolocation.getCurrentPosition(passLocation);
-    }
-  }
+//       var x;
+//       navigator.geolocation.getCurrentPosition(passLocation);
+//     }
+//   }
 
-  function passLocation(position) {
-    corysVar = position.coords.latitude + ", " + position.coords.longitude;
-    setCity(corysVar);
-    getURL(corysVar);
-  }
+//   function passLocation(position) {
+//     corysVar = position.coords.latitude + ", " + position.coords.longitude;
+//     setCity(corysVar);
+//     getURL(corysVar);
+//   }
 
 
 
-function getURL(location, tempSetting) {
-  var url = ("https://api.forecast.io/forecast/2b4b9e2d0c9c7ba61f588616d2967c9c/" + corysVar);
+// function getURL(location, tempSetting) {
+//   var url = ("https://api.forecast.io/forecast/2b4b9e2d0c9c7ba61f588616d2967c9c/" + corysVar);
  
-  getJson(url);
+//   getJson(url);
 
-}
+// }
 
-function getJson(url) {
+// function getJson(url) {
   
 
-  $.ajax({
-      format: "jsonp",
-      dataType: "jsonp",
-      url: url,
-      success: function(json) {
+//   $.ajax({
+//       format: "jsonp",
+//       dataType: "jsonp",
+//       url: url,
+//       success: function(json) {
       
-        // $("#weather-current").html(Math.round(json.currently.icon) + "°");
-      $("#romanticButton").on("click", function(){
-	romanticPlaylist(json.currently.icon);
-      console.log("hi");
-  		})
-      }
+//         // $("#weather-current").html(Math.round(json.currently.icon) + "°");
+      
+// 	backgroundImage(json.currently.icon);
+//       console.log("hi");
+  		
+//       }
 
-    })
-    // .error(function(jqXHR, textStatus, errorThrown) {
-    //   alert("error: " + JSON.stringify(jqXHR));
-    // })
-}
+//     })
+//     // .error(function(jqXHR, textStatus, errorThrown) {
+//     //   alert("error: " + JSON.stringify(jqXHR));
+//     // })
+// }
 
-
-var songs;
-
-function romanticPlaylist(weatherIcon) {
-  console.log(weatherIcon);
-  switch (weatherIcon) {
-    case "clear-day":
-      document.getElementById("body").style.backgroundImage = 'url("http://img02.deviantart.net/d2c2/i/2005/028/b/6/clear_day_by_juanchis.jpg")';
+// function backgroundImage(weatherIcon) {
+//   console.log(weatherIcon);
+//   switch (weatherIcon) {
+//     case "clear-day":
+//       document.getElementById("body").style.backgroundImage = 'url("http://img02.deviantart.net/d2c2/i/2005/028/b/6/clear_day_by_juanchis.jpg")';
        
-      break;
-    case "clear-night":
-      document.getElementById("body").style.backgroundImage = 'url("https://tcklusman.files.wordpress.com/2014/05/tumblr_static_dark-starry-night-sky-226736.jpg")';
+//       break;
+//     case "clear-night":
+//       document.getElementById("body").style.backgroundImage = 'url("https://tcklusman.files.wordpress.com/2014/05/tumblr_static_dark-starry-night-sky-226736.jpg")';
        
-      break;
-    case "rain":
-      document.getElementById("body").style.backgroundImage = 'url("http://wearechange.org/wp-content/uploads/2015/03/1_See_It.jpg")';
+//       break;
+//     case "rain":
+//       document.getElementById("body").style.backgroundImage = 'url("http://wearechange.org/wp-content/uploads/2015/03/1_See_It.jpg")';
     
-      break;
-    case "cloudy":
-      document.getElementById("body").style.backgroundImage = 'url("http://www.tripwire.com/state-of-security/wp-content/uploads/cache//shutterstock_106367810/4261234929.jpg")';
+//       break;
+//     case "cloudy":
+//       document.getElementById("body").style.backgroundImage = 'url("http://www.tripwire.com/state-of-security/wp-content/uploads/cache//shutterstock_106367810/4261234929.jpg")';
       
-      break;
-    case "partly-cloudy-day":
-      document.getElementById("body").style.backgroundImage = 'url("http://www.sturdyforcommonthings.com/wp-content/uploads/2013/03/wind_blowing.jpg")';
+//       break;
+//     case "partly-cloudy-day":
+//       document.getElementById("body").style.backgroundImage = 'url("http://www.sturdyforcommonthings.com/wp-content/uploads/2013/03/wind_blowing.jpg")';
       
-      break;
-    case "partly-cloudy-night":
-      document.getElementById("body").style.backgroundImage = 'url("http://scienceblogs.com/startswithabang/files/2013/04/night-sky-stars.jpeg")';
+//       break;
+//     case "partly-cloudy-night":
+//       document.getElementById("body").style.backgroundImage = 'url("http://scienceblogs.com/startswithabang/files/2013/04/night-sky-stars.jpeg")';
        
-      break;
-    case "snow":
-      document.getElementById("body").style.backgroundImage = 'url("http://www.vancitybuzz.com/wp-content/uploads/2015/12/shutterstock_315123593-984x500.jpg")';
+//       break;
+//     case "snow":
+//       document.getElementById("body").style.backgroundImage = 'url("http://www.vancitybuzz.com/wp-content/uploads/2015/12/shutterstock_315123593-984x500.jpg")';
         
-      break;
-    default:
-      break;
+//       break;
+//     default:
+//       break;
 
-  }
+//   }
 
-};
+// };
 
 $("#boredButton").on("click", function(){
-        DZ.player.playPlaylist(2096299244);
+        DZ.player.playPlaylist(3178790502);
         });
        
 

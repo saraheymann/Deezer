@@ -12,9 +12,7 @@
 
     <div id="weather-location"></div>
     <div id="weather-current"></div>
-    <div>
-    	<p id="temp-type">Fahrenheit</p>
-    </div>
+   
 
     <button id="romanticButton">Romantic</button>
     <button id="boredButton">Bored</button>
@@ -134,8 +132,8 @@ function getJson(url) {
       success: function(json) {
       
         // $("#weather-current").html(Math.round(json.currently.icon) + "°");
-      $("#romanticButton").on("click", romanticPlaylist(json.currently.icon))
-      console.log(romanticPlaylist);
+      $("#romanticButton").on("click", romanticPlaylist(json.currently.icon));
+      // console.log(romanticPlaylist);
       }
 
     })
@@ -171,35 +169,35 @@ function getJson(url) {
 var songs;
 
 function romanticPlaylist(weatherIcon) {
-  //console.log(weatherIcon);
+  console.log(weatherIcon);
   switch (weatherIcon) {
     case "clear-day":
       DZ.player.playPlaylist(2096299244);
-        };
+       
       break;
-    // case "clear-night":
-    //   DZ.player.playPlaylist(2235506522);
-    //     };
-      // break;
+    case "clear-night":
+      DZ.player.playPlaylist(2235506522);
+       
+      break;
     case "rain":
       DZ.player.playPlaylist(2096299244);
-        };
+    
       break;
     case "cloudy":
       DZ.player.playPlaylist(2096299244);
-        };
+      
       break;
     case "partly-cloudy-day":
       DZ.player.playPlaylist(2096299244);
-        };
+      
       break;
     case "partly-cloudy-night":
       DZ.player.playPlaylist(2247598026);
-        };
+       
       break;
     case "snow":
       DZ.player.playPlaylist(2096299244);
-        };
+        
       break;
     default:
       break;

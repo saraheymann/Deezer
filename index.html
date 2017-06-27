@@ -168,44 +168,38 @@ function getJson(url) {
 //   }
 
 // });
+var songs;
 
 function romanticPlaylist(weatherIcon) {
   //console.log(weatherIcon);
   switch (weatherIcon) {
     case "clear-day":
-      DZ.api('/playlist/908622995', function(response){
-            console.log(response);
-        })
+      DZ.player.playPlaylist(2096299244);
+        };
       break;
     case "clear-night":
-      DZ.api('/playlist/908622995', function(response){
-            console.log(response);
-        })
+      DZ.player.playPlaylist(2235506522);
+        };
       break;
     case "rain":
-      DZ.api('/playlist/908622995', function(response){
-            console.log(response);
-        })
+      DZ.player.playPlaylist(2096299244);
+        };
       break;
     case "cloudy":
-      DZ.api('/playlist/908622995', function(response){
-            console.log(response);
-        })
+      DZ.player.playPlaylist(2096299244);
+        };
       break;
     case "partly-cloudy-day":
-      DZ.api('/playlist/908622995', function(response){
-            console.log(response);
-        })
+      DZ.player.playPlaylist(2096299244);
+        };
       break;
     case "partly-cloudy-night":
-      DZ.api('/playlist/908622995', function(response){
-            console.log(response);
-        })
+      DZ.player.playPlaylist(2247598026);
+        };
       break;
     case "snow":
-      DZ.api('/playlist/908622995', function(response){
-            console.log(response);
-        })
+      DZ.player.playPlaylist(2096299244);
+        };
       break;
     default:
       break;
@@ -213,8 +207,9 @@ function romanticPlaylist(weatherIcon) {
   }
 
 };
+
 $("#boredButton").on("click", function(){
-        DZ.player.playPlaylist(2096299244);
+        DZ.player.playPlaylist(songs);
         });
        
 

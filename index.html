@@ -132,8 +132,12 @@ function getJson(url) {
       success: function(json) {
       
         // $("#weather-current").html(Math.round(json.currently.icon) + "°");
-      $("#romanticButton").on("click", romanticPlaylist(json.currently.icon));
+      $("#romanticButton").on("click", function(){
+
+
+      romanticPlaylist(json.currently.icon);
       console.log("hi");
+  		})
       }
 
     })

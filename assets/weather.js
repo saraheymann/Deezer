@@ -5,12 +5,13 @@ $(document).ready(function() {
 function getLocation() {
   var location;
   $.ajax({
-    format: "jsonp",
+    // format: "jsonp",
+    url: "https://geoip-db.com/jsonp",
+    jsonpCallback: "callback",
     dataType: "jsonp",
-    url: "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAtFMJf63AL4K3z04Q0lwAkk6DBeUhdrac",
     success: function(data) {
-      location = (data.lat + "," + data.lon);
-      $("#weather-location").html(data.city + ", " + data.region);
+      location = (data.latitude + "," + data.longitude);
+      $("#weather-location").html(data.postal + " " + data.city + " " + data.state);
       getURL(location)
     },
     error: function() {

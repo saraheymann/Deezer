@@ -7,7 +7,7 @@ function getLocation() {
   $.ajax({
     format: "jsonp",
     dataType: "jsonp",
-    url: "http://ip-api.com/json",
+    url: "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAtFMJf63AL4K3z04Q0lwAkk6DBeUhdrac",
     success: function(data) {
       location = (data.lat + "," + data.lon);
       $("#weather-location").html(data.city + ", " + data.region);

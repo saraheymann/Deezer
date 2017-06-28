@@ -29,24 +29,24 @@ function getLocation() {
 
   function passLocation(position) {
     location = position.coords.latitude + ", " + position.coords.longitude;
-    setCity(location);
+    // setCity(location);
     getURL(location);
   }
 }
 
-function setCity(latLon) {
-  var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon + "&sensor=true";
-  url = url.replace(/\s/g, "");
-  $.ajax({
-    format: "json",
-    dataType: "json",
-    url: url,
-    success: function(data) {
-      $('#weather-location').html(data.results[0].address_components[2].long_name);
-    },
-    method: "GET"
-  });
-}
+// function setCity(latLon) {
+//   var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latLon + "&sensor=true";
+//   url = url.replace(/\s/g, "");
+//   $.ajax({
+//     format: "json",
+//     dataType: "json",
+//     url: url,
+//     success: function(data) {
+//       $('#weather-location').html(data.results[0].address_components[2].long_name);
+//     },
+//     method: "GET"
+//   });
+// }
 
 function getURL(location, tempSetting) {
   var url = ("https://api.forecast.io/forecast/2b4b9e2d0c9c7ba61f588616d2967c9c/" + location);
